@@ -259,10 +259,21 @@
 }
 
 .commucore-post-card {
+    display: flex;
+    gap: 1.25rem;
     padding: 1.25rem;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     background: #fff;
+}
+
+.commucore-post-thumb {
+    display: block;
+    width: 150px;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 .commucore-post-label {
@@ -299,6 +310,39 @@
 
 /* ── Beitrag Einzelansicht ────────────────────────────────────────────────── */
 
+.commucore-post-single {
+    max-width: 100%;
+}
+
+.commucore-post-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.commucore-post-main {
+    flex: 1;
+}
+
+.commucore-post-sidebar {
+    flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+    .commucore-post-layout {
+        flex-direction: row-reverse;
+    }
+
+    .commucore-post-main {
+        flex: 4;
+    }
+
+    .commucore-post-sidebar {
+        width: 20%;
+        min-width: 180px;
+    }
+}
+
 .commucore-post-header {
     margin-bottom: 1.5rem;
 }
@@ -311,14 +355,17 @@
 /* ── Bildergalerie ────────────────────────────────────────────────────────── */
 
 .commucore-post-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
-    margin-top: 2rem;
 }
 
 .commucore-gallery-item {
     margin: 0;
+}
+
+.commucore-gallery-item a {
+    display: block;
 }
 
 .commucore-gallery-item img {
@@ -345,6 +392,15 @@
 @media (max-width: 600px) {
     .commucore-event-card {
         flex-direction: column;
+    }
+
+    .commucore-post-card {
+        flex-direction: column;
+    }
+
+    .commucore-post-thumb {
+        width: 100%;
+        max-height: 200px;
     }
 
     .commucore-program-item {

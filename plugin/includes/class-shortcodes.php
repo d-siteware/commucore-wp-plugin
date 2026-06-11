@@ -13,6 +13,7 @@ class CommuCore_Shortcodes
         add_shortcode('commucore_events',       [$this, 'render_events']);
         add_shortcode('commucore_event_single', [$this, 'render_event_single']);
         add_shortcode('commucore_posts',        [$this, 'render_posts']);
+        add_shortcode('commucore_post_single',  [$this, 'render_post_single']);
     }
 
     /**
@@ -87,8 +88,12 @@ class CommuCore_Shortcodes
         $options = get_option(COMMUCORE_OPTION_KEY, []);
         $client  = new CommuCore_Api_Client();
 
-        if (! empty($atts['id'])) {
-            $data = $client->get('posts/' . absint($atts['id']));
+        $post_id = ! empty($atts['id'])
+            ? absint($atts['id'])
+            : absint(get_query_var('post_id', 0));
+
+        if ($post_id) {
+            $data = $client->get('posts/' . $post_id);
             return $this->render_template('post-single', $data, $options);
         }
 
@@ -98,6 +103,35 @@ class CommuCore_Shortcodes
 
         $data = $client->get('posts', $params);
         return $this->render_template('posts-list', $data, $options);
+    }
+
+    /**
+     * [commucore_post_single]
+     * Liest post_id aus dem URL-Segment: /beitrag/42/
+     *
+     * @param array<string, string>|string $atts
+     */
+    public function render_post_single($atts): string
+    {
+        $atts = shortcode_atts([
+            'id' => '',
+        ], $atts, 'commucore_post_single');
+
+        $options = get_option(COMMUCORE_OPTION_KEY, []);
+        $client  = new CommuCore_Api_Client();
+
+        $post_id = ! empty($atts['id'])
+            ? absint($atts['id'])
+            : absint(get_query_var('post_id', 0));
+
+        if (! $post_id) {
+            return $this->render_error(
+                __('Kein Beitrag ausgewählt.', 'commucore')
+            );
+        }
+
+        $data = $client->get('posts/' . $post_id);
+        return $this->render_template('post-single', $data, $options);
     }
 
     /**

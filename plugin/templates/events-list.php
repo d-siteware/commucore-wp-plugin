@@ -12,10 +12,12 @@ if (! defined('ABSPATH')) {
  * Verfügbare Variablen:
  *   $data    — API-Response Array mit 'data' (Items) und 'meta' (Pagination)
  *   $options — Plugin-Einstellungen
+ *
+ * <a href="http://localhost:8080/veranstaltung/2/" class="commucore-event-more">
+ * Mehr erfahren →                </a>
  */
 
 $events      = $data['data'] ?? [];
-$thumb_size  = $options['thumbnail_size']    ?? 'medium';
 $date_format = $options['date_format']       ?? 'long';
 $detail_slug = $options['events_detail_slug'] ?? 'veranstaltung';
 
@@ -23,25 +25,35 @@ if (empty($events)) {
     echo '<p class="commucore-empty">' . esc_html__('Keine Veranstaltungen gefunden.', 'commucore') . '</p>';
     return;
 }
-
-$thumb_widths = ['small' => 150, 'medium' => 300, 'large' => 600];
-$thumb_width  = $thumb_widths[$thumb_size] ?? 300;
 ?>
 
 <div class="commucore-events-list">
     <?php foreach ($events as $event) :
-        $thumbnail   = $event['poster'] ?? $event['image'] ?? null;
-        $detail_url  = home_url('/' . $detail_slug . '/' . $event['id'] . '/');
+        $thumbnail  = $event['image_medium'] ?? $event['image'] ?? $event['poster'] ?? null;
+        $detail_url = commucore_detail_url($detail_slug, 'event_id', 'commucore_events_detail_page_id', (int) $event['id']);
+
+        $srcset_parts = [];
+        foreach (['small' => 150, 'medium' => 300, 'large' => 600] as $name => $w) {
+            $field = 'image_' . $name;
+            if (! empty($event[$field])) {
+                $srcset_parts[] = $event[$field] . ' ' . $w . 'w';
+            }
+        }
+        $srcset = ! empty($srcset_parts) ? implode(', ', $srcset_parts) : '';
     ?>
         <article class="commucore-event-card">
 
-            <?php if ($thumb_size !== 'none' && ! empty($thumbnail)) : ?>
+            <?php if (! empty($thumbnail)) : ?>
                 <div class="commucore-event-image">
                     <a href="<?php echo esc_url($detail_url); ?>">
                         <img
                             src="<?php echo esc_url($thumbnail); ?>"
+                            <?php if (! empty($srcset)) : ?>
+                            srcset="<?php echo esc_attr($srcset); ?>"
+                            sizes="(max-width: 768px) 100vw, 300px"
+                            <?php endif; ?>
                             alt="<?php echo esc_attr($event['title'] ?? ''); ?>"
-                            width="<?php echo esc_attr((string) $thumb_width); ?>"
+                            width="300"
                             loading="lazy"
                         />
                     </a>

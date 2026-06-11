@@ -15,8 +15,8 @@ if (! defined('ABSPATH')) {
  */
 
 $posts       = $data['data'] ?? [];
-$thumb_size  = $options['thumbnail_size'] ?? 'medium';
-$date_format = $options['date_format']    ?? 'long';
+$date_format = $options['date_format'] ?? 'long';
+$detail_slug = $options['posts_detail_slug'] ?? 'beitrag';
 
 if (empty($posts)) {
     echo '<p class="commucore-empty">' . esc_html__('Keine Beiträge gefunden.', 'commucore') . '</p>';
@@ -25,8 +25,35 @@ if (empty($posts)) {
 ?>
 
 <div class="commucore-posts-list">
-    <?php foreach ($posts as $post) : ?>
+    <?php foreach ($posts as $post) :
+        $thumb = $post['image_small'] ?? $post['image'] ?? null;
+        $detail_url = commucore_detail_url($detail_slug, 'post_id', 'commucore_posts_detail_page_id', (int) $post['id']);
+        $srcset_parts = [];
+        if (! empty($post['image_small'])) {
+            $srcset_parts[] = $post['image_small'] . ' 150w';
+        }
+        if (! empty($post['image'])) {
+            $srcset_parts[] = $post['image'] . ' 300w';
+        }
+        $srcset = ! empty($srcset_parts) ? implode(', ', $srcset_parts) : '';
+    ?>
         <article class="commucore-post-card">
+
+            <?php if (! empty($thumb)) : ?>
+                <div class="commucore-event-image">
+                    <a href="<?php echo esc_url($detail_url); ?>">
+                        <img src="<?php echo esc_url($thumb); ?>"
+                             <?php if (! empty($srcset)) : ?>
+                             srcset="<?php echo esc_attr($srcset); ?>"
+                             <?php endif; ?>
+                             sizes="150px"
+                             alt="<?php echo esc_attr($post['title'] ?? ''); ?>"
+                             class="commucore-post-thumb"
+                             width="150"
+                             loading="lazy" />
+                    </a>
+                </div>
+            <?php endif; ?>
 
             <div class="commucore-post-body">
 
@@ -37,7 +64,9 @@ if (empty($posts)) {
                 <?php endif; ?>
 
                 <h3 class="commucore-post-title">
-                    <?php echo esc_html($post['title'] ?? ''); ?>
+                    <a href="<?php echo esc_url($detail_url); ?>">
+                        <?php echo esc_html($post['title'] ?? ''); ?>
+                    </a>
                 </h3>
 
                 <div class="commucore-post-meta">
@@ -60,6 +89,10 @@ if (empty($posts)) {
                         <?php echo esc_html($post['excerpt']); ?>
                     </p>
                 <?php endif; ?>
+
+                <a href="<?php echo esc_url($detail_url); ?>" class="commucore-event-more">
+                    <?php esc_html_e('Mehr erfahren →', 'commucore'); ?>
+                </a>
 
             </div>
 

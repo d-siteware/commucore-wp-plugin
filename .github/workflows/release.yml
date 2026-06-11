@@ -1,0 +1,35 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build plugin zip
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create plugin archive
+        run: |
+          mkdir -p build/commucore
+          cp -r plugin/* build/commucore/
+          cd build
+          zip -r ../commucore.zip commucore/
+
+      - name: Generate checksums
+        run: |
+          sha256sum commucore.zip > commucore.zip.sha256
+          echo "Checksum:"
+          cat commucore.zip.sha256
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            commucore.zip
+            commucore.zip.sha256
+          generate_release_notes: true

@@ -1,0 +1,49 @@
+=== CommuCore ===
+Mitwirkende: commucore
+Schlagwörter: community, veranstaltungen, beiträge, api, verein
+Getestet bis: 6.7
+Erforderliche PHP-Version: 8.1
+Lizenz: GPLv2 oder später
+Lizenz-URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Zeige Veranstaltungen und Beiträge aus deiner CommuCore-Instanz auf deiner WordPress-Seite an.
+
+== Beschreibung ==
+
+CommuCore verbindet deine WordPress-Seite mit deiner CommuCore-Instanz. Zeige Veranstaltungen und Beiträge mit einfachen Shortcodes an.
+
+= Funktionen =
+
+* Veranstaltungsliste mit Bildern und Detailansicht
+* Beitragsliste mit Einzelansicht
+* Anpassbare URL-Slugs
+* Responsive Templates
+* Shortcode-basierte Einbindung
+* Mehrsprachig vorbereitet (DE, EN, HU)
+
+== Installation ==
+
+1. Lade das Plugin hoch und aktiviere es.
+2. Gehe zu Einstellungen → CommuCore und gib deine Instanz-URL und deinen API-Schlüssel ein.
+3. Die benötigten Seiten werden automatisch angelegt.
+4. Verwende die Shortcodes [commucore_events] oder [commucore_posts] in deinen Seiten.
+
+== FAQ ==
+
+= Wo finde ich meinen API-Schlüssel? =
+
+In CommuCore unter Profil → API-Schlüssel.
+
+= Mit welchen Permalink-Einstellungen funktioniert das Plugin? =
+
+Die Slug-basierten URLs (/veranstaltung/42/) benötigen Pretty Permalinks (Einstellungen → Permalinks → "Beitragsname"). Mit Standard-Permalinks funktionieren die Seiten über ?page_id=-Links.
+
+== Changelog ==
+
+= 1.0.0 =
+* Erste Veröffentlichung
+* Veranstaltungsliste und -detail
+* Beitragsliste und -detail
+* Anpassbare URL-Slugs
+* Shortcode-Integration
+* Mehrsprachigkeit vorbereitet (DE, EN, HU)

@@ -32,21 +32,11 @@ function commucore_format_date(string $date, string $format = 'long'): string
 
 /**
  * Deutsches Langformat: "15. Juni 2025"
+ * Übersetzt via date_i18n() basierend auf der Site-Locale.
  */
 function commucore_format_date_long(int $ts): string
 {
-    $months = [
-        1  => 'Januar',   2  => 'Februar', 3  => 'März',
-        4  => 'April',    5  => 'Mai',     6  => 'Juni',
-        7  => 'Juli',     8  => 'August',  9  => 'September',
-        10 => 'Oktober',  11 => 'November', 12 => 'Dezember',
-    ];
-
-    $day   = (int) date('j', $ts);
-    $month = (int) date('n', $ts);
-    $year  = date('Y', $ts);
-
-    return sprintf('%d. %s %s', $day, $months[$month], $year);
+    return date_i18n('j. F Y', $ts);
 }
 
 /**
@@ -62,4 +52,28 @@ function commucore_format_amount(?int $cents): string
     }
 
     return number_format($cents / 100, 2, ',', '.') . ' €';
+}
+
+/**
+ * Detail-URL für ein Item (Event oder Post) generieren,
+ * abhängig von der aktuellen Permalink-Einstellung.
+ *
+ * @param string $slug           Detail-Slug, z.B. 'veranstaltung' oder 'beitrag'
+ * @param string $query_var      Query-Variable, z.B. 'event_id' oder 'post_id'
+ * @param string $page_option_key WP-Option-Name für die Detailseiten-ID
+ * @param int    $item_id        ID des anzuzeigenden Items
+ */
+function commucore_detail_url(string $slug, string $query_var, string $page_option_key, int $item_id): string
+{
+    if (get_option('permalink_structure')) {
+        return home_url('/' . $slug . '/' . $item_id . '/');
+    }
+
+    $page_id = get_option($page_option_key, 0);
+
+    if ($page_id) {
+        return add_query_arg($query_var, $item_id, get_permalink($page_id));
+    }
+
+    return home_url('/?' . $query_var . '=' . $item_id);
 }

@@ -16,8 +16,15 @@ if (! defined('ABSPATH')) {
 
 $event       = $data['data'] ?? [];
 $date_format = $options['date_format'] ?? 'long';
-$thumb_size  = $options['thumbnail_size'] ?? 'medium';
-$thumbnail   = $event['poster'] ?? $event['image'] ?? null;
+
+$srcset_parts = [];
+foreach (['small' => 150, 'medium' => 300, 'large' => 600] as $name => $w) {
+    $field = 'image_' . $name;
+    if (! empty($event[$field])) {
+        $srcset_parts[] = $event[$field] . ' ' . $w . 'w';
+    }
+}
+$srcset = ! empty($srcset_parts) ? implode(', ', $srcset_parts) : '';
 
 
 if (empty($event)) {
@@ -81,13 +88,22 @@ if (empty($event)) {
                 <?php endif; ?>
             </div>
 
-            <?php if ($thumb_size !== 'none' && ! empty($thumbnail)) : ?>
+            <?php
+                $display_src = $event['image_large'] ?? $event['image'] ?? $event['poster'] ?? null;
+                $poster_url  = $event['poster'] ?? $event['image'] ?? null;
+            ?>
+            <?php if (! empty($display_src)) : ?>
                 <div class="commucore-event-hero-image-wrapper">
-                    <a href="<?php echo esc_url($thumbnail); ?>"
+                    <a href="<?php echo esc_url($poster_url ?: $display_src); ?>"
                        target="_blank"
                        rel="noopener noreferrer">
                         <img class="commucore-event-hero-image"
-                             src="<?php echo esc_url($thumbnail); ?>"
+                             src="<?php echo esc_url($display_src); ?>"
+                             <?php if (! empty($srcset)) : ?>
+                             srcset="<?php echo esc_attr($srcset); ?>"
+                             sizes="(max-width: 768px) 100vw, 600px"
+                             <?php endif; ?>
+                             width="600"
                              alt="<?php echo esc_attr($event['title'] ?? ''); ?>"
                              loading="lazy" />
                     </a>

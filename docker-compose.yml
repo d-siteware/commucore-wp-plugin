@@ -1,0 +1,28 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    extra_hosts:
+      - "commucore.test:host-gateway"
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - ./plugin:/var/www/html/wp-content/plugins/commucore
+
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_DATABASE: wp
+      MARIADB_USER: wp
+      MARIADB_PASSWORD: wp
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

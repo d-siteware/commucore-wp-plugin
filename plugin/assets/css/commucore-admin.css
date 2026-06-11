@@ -1,0 +1,68 @@
+/* CommuCore Admin Styles */
+
+.commucore-settings .commucore-header {
+    margin: 1.5rem 0;
+}
+
+.commucore-settings .commucore-header h1 {
+    margin-bottom: 0.25rem;
+}
+
+.commucore-settings .commucore-header p {
+    color: #666;
+    margin-top: 0;
+}
+
+.commucore-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+}
+
+.commucore-card h2 {
+    margin-top: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f0f0f1;
+    font-size: 1rem;
+}
+
+.commucore-test-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f1;
+}
+
+.commucore-test-result {
+    font-size: 0.9em;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+}
+
+.commucore-testing {
+    background: #f0f6fc;
+    color: #0969da;
+}
+
+.commucore-success {
+    background: #dafbe1;
+    color: #1a7f37;
+}
+
+.commucore-error {
+    background: #fff3f3;
+    color: #c0392b;
+}
+
+.commucore-shortcode-table code {
+    background: #f6f7f7;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    white-space: nowrap;
+}

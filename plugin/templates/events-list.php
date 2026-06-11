@@ -81,7 +81,7 @@ $thumb_width  = $thumb_widths[$thumb_size] ?? 300;
 
                 <?php if (! empty($event['excerpt'])) : ?>
                     <p class="commucore-event-excerpt">
-                        <?php echo esc_html($event['excerpt']); ?>
+                        <?php echo wp_kses_post($event['excerpt']); ?>
                     </p>
                 <?php endif; ?>
 

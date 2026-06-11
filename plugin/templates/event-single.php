@@ -120,7 +120,7 @@ if (empty($event)) {
                                     </span>
                                     <?php if (! empty($item['description'])) : ?>
                                         <span class="commucore-program-desc">
-                                            <?php echo esc_html($item['description']); ?>
+                                            <?php echo wp_kses_post($item['description']); ?>
                                         </span>
                                     <?php endif; ?>
                                     <?php if (! empty($item['performer'])) : ?>

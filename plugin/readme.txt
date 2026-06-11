@@ -4,7 +4,7 @@ Tags: community, events, posts, api, organization, club
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.1
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,30 +17,32 @@ CommuCore connects your WordPress site to your CommuCore instance. Display event
 = Features =
 
 * Event list with images and detail view
-* Post list with single post view
-* Customizable URL slugs
+* Post list with a detail view
+* Customizable URL slugs for pretty permalinks
 * Responsive templates
 * Shortcode-based integration
 * Multi-language ready (DE, EN, HU)
 
 == Installation ==
 
-1. Upload the plugin and activate it.
+1. Upload the plugin and activate it. At the first activation, the required pages are created automatically using the default slug values.
 2. Go to Settings → CommuCore and enter your instance URL and API key.
-3. Required pages are created automatically.
-4. Use the `[commucore_events]` or `[commucore_posts]` shortcodes on your pages.
+3. Use the `[commucore_events]` or `[commucore_posts]` shortcodes on your pages.
 
 == Frequently Asked Questions ==
 
 = Where do I find my API key? =
 
-In CommuCore under Profile → API keys.
+In CommuCore in the user menu at API keys.
 
 = Which permalink settings does the plugin require? =
 
-Slug-based URLs (e.g. /event/42/) require pretty permalinks (Settings → Permalinks → "Post name"). With plain permalinks all pages work via ?page_id= links.
+The plugin is agnostic and generates the required link structure. To use your on slugs in the URLs (e.g. /event/42/), the pretty permalinks (Settings → Permalinks → "Post name") have to be selected.
 
 == Changelog ==
+
+= 1.0.2 =
+* Add mandatory files to meet WP.org requirements for plugins
 
 = 1.0.0 =
 * Initial release

@@ -1,2 +1,4 @@
+.DS_Store
 /.idea
 /.opencode/
+docker-compose.yml

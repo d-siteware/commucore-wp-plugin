@@ -41,6 +41,9 @@ The plugin is agnostic and generates the required link structure. To use your on
 
 == Changelog ==
 
+= 1.0.3 =
+* Minor fixes of version id's
+
 = 1.0.2 =
 * Add mandatory files to meet WP.org requirements for plugins
 

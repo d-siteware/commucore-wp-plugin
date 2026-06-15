@@ -1,10 +1,17 @@
 # CommuCore Wordpress Plugin
+
 Contributors: commucore
+
 Tags: community, events, posts, api, organization, club
+
 Requires at least: 6.0
+
 Tested up to: 6.7
+
 Requires PHP: 8.1
-Stable tag: 1.0.2
+
+Stable tag: 1.0.3
+
 License: MIT
 
 Display events and posts from your CommuCore instance on your WordPress site.

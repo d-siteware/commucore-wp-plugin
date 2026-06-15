@@ -41,6 +41,10 @@ The plugin is agnostic and generates the required link structure. To use your on
 
 == Changelog ==
 
+= 1.0.4 =
+* Add cache clearing butto to settings page
+* Minor fixes on posts list template
+
 = 1.0.3 =
 * Minor fixes of version id's
 

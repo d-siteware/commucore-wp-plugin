@@ -42,6 +42,10 @@ The plugin is agnostic and generates the required link structure. To use your on
 
 ## Changelog
 
+**1.0.4**
+- Add a cache clearing button to the settings page
+- Remove label display on posts-list and posts-single template
+
 **1.0.3**
 - Minor fixes of version id's
 

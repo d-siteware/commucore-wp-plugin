@@ -29,12 +29,6 @@ if (empty($post)) {
 
         <div class="commucore-post-main">
 
-            <?php if (! empty($post['label'])) : ?>
-                <span class="commucore-post-label">
-                    <?php echo esc_html($post['label']); ?>
-                </span>
-            <?php endif; ?>
-
             <h2 class="commucore-post-title">
                 <?php echo esc_html($post['title'] ?? ''); ?>
             </h2>

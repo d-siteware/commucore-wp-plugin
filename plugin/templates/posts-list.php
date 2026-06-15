@@ -57,12 +57,6 @@ if (empty($posts)) {
 
             <div class="commucore-post-body">
 
-                <?php if (! empty($post['label'])) : ?>
-                    <span class="commucore-post-label">
-                        <?php echo esc_html($post['label']); ?>
-                    </span>
-                <?php endif; ?>
-
                 <h3 class="commucore-post-title">
                     <a href="<?php echo esc_url($detail_url); ?>">
                         <?php echo esc_html($post['title'] ?? ''); ?>

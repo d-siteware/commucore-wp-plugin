@@ -35,6 +35,13 @@ class CommuCore_Settings
 
     public function sanitize(array $input): array
     {
+
+        if (isset($_POST['commucore_flush_cache'])) {
+            CommuCore_Api_Client::flush_cache();
+            set_transient('commucore_flushed_notice', true, 60);
+            return get_option(COMMUCORE_OPTION_KEY, []);
+        }
+
         $clean = [];
 
         $clean['instance_url'] = isset($input['instance_url'])
@@ -173,9 +180,23 @@ class CommuCore_Settings
                        <p><?php esc_html_e('Verbinde deine WordPress-Seite mit CommuCore.', 'commucore'); ?></p>
                    </div>
                </div>
+
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <?php
+                    if (get_transient('commucore_flushed_notice')) {
+                        delete_transient('commucore_flushed_notice');
+                        add_settings_error('commucore', 'cache_flushed',
+                                __('Cache wurde geleert. Daten werden beim nächsten Seitenaufruf neu geladen.', 'commucore'),
+                                'success'
+                        );
+                    }
+                    settings_errors('commucore');
+
+                    ?>
+                </div>
             </div>
 
-            <?php settings_errors('commucore'); ?>
+
 
             <form method="post" action="options.php">
                 <?php settings_fields('commucore'); ?>
@@ -264,6 +285,15 @@ class CommuCore_Settings
                                 <?php esc_html_e('Verbindung testen', 'commucore'); ?>
                             </button>
                             <span id="commucore-test-result" class="commucore-test-result" style="display:none;"></span>
+                        </div>
+
+                        <div class="commucore-test-row">
+                            <span>
+                                API Aufrufe werden <code>15 Minuten</code> im Cache gespeichert. Änderungen an der CommuCore werden entsprechend verzögert angezeit. Optional kann der <strong>Cache gelöscht</strong> werden.
+                            </span>
+                            <button type="submit" name="commucore_flush_cache" value="1" class="button button-secondary">
+                                Cache leeren
+                            </button>
                         </div>
                     </div>
 

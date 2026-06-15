@@ -4,12 +4,12 @@
  * Plugin Name:       CommuCore
  * Plugin URI:        https://commu-core.com
  * Description:       Veranstaltungen und Beiträge aus CommuCore auf deiner WordPress-Seite einbinden.
- * Version:           1.0.3
+ * Version:           1.0.4
  * Requires at least: 6.0
  * Requires PHP:      8.1
  * Author:            CommuCore
  * Author URI:        https://commu-core.com
- * License:           GPL v2 or later
+ * License:           MIT
  * Text Domain:       commucore
  */
 
@@ -19,7 +19,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-define('COMMUCORE_VERSION', '1.0.3');
+define('COMMUCORE_VERSION', '1.0.4');
 define('COMMUCORE_PATH', plugin_dir_path(__FILE__));
 define('COMMUCORE_URL', plugin_dir_url(__FILE__));
 define('COMMUCORE_OPTION_KEY', 'commucore_settings');

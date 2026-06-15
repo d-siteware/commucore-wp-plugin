@@ -1,18 +1,13 @@
 # CommuCore Wordpress Plugin
 
-Contributors: commucore
+![Version](https://img.shields.io/github/v/release/d-siteware/commucore-wp-plugin)
+![Lizenz](https://img.shields.io/badge/Lizenz-MIT%20v2%2B-green)
+![PHP](https://img.shields.io/badge/PHP-8.1%2B-blue)
+![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue)
+
+Contributors: d-siteware
 
 Tags: community, events, posts, api, organization, club
-
-Requires at least: 6.0
-
-Tested up to: 6.7
-
-Requires PHP: 8.1
-
-Stable tag: 1.0.3
-
-License: MIT
 
 Display events and posts from your CommuCore instance on your WordPress site.
 
